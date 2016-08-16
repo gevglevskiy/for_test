@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Основы jQuery 4 События</title>
+  <!--<script type="text/javascript" src="js/jquery.js"> </script> -->
+  <script   src="http://code.jquery.com/jquery-2.2.4.js"   integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="   crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <style media="screen">
+    .SomeDiv{
+      height: 150px;
+      width: 150px;
+      display: inline-block;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    #div1{background-color: blue;}
+    #div2{background-color: green;}
+    #div3{background-color: yellow;}
+    #div4{background-color: black;}
+    #div5{background-color: gray;}
+    #modalDiv {
+      width: 400px;
+      height: 400px;
+      position: absolute;
+      background-color: green;
+      display: none;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+<body>
+  <div id="div1" class="SomeDiv"></div>
+  <div id="div2" class="SomeDiv"></div>
+  <div id="div3" class="SomeDiv"></div>
+  <div id="div4" class="SomeDiv"></div>
+  <div id="div5" class="SomeDiv"></div>
+  <div id="modalDiv"></div>
+
+
+  <script type="text/javascript">
+  var animTime = 1000;
+  var modal = $('#modalDiv');
+  var oldDiv = null;
+
+  $('.SomeDiv').on('click', function (e) {
+    if (oldDiv) {
+      oldDiv.css('opacity',1);
+    }
+    var jthis = $(this);
+    modal.css({ 'top':jthis.offset().top,
+                'left':jthis.offset().left,
+                'width':jthis.width(),
+                'height':jthis.height(),
+                'background-color':jthis.css('background-color'),
+                'opacity':1,
+                'display': 'block'
+              });
+
+    jthis.css('opacity',0);
+
+    n = 0;
+
+    modal
+    .animate({'height':400,
+              'width':400},{
+                duration: 1000,
+                queue: false,
+                specialEasing: {
+                  height: 'linear',
+                  width: 'linear'
+                },
+                complete: function () {
+                  console.log('Animate finish');
+                },
+                step: function () {
+                  console.log(n++);
+                  if (n == 100) {
+                    modal.stop();
+                  }
+                }
+              })
+    .animate({'top':(window.innerHeight - 400) / 2,
+              'left':(window.innerWidth - 400) / 2},{
+                duration: 1000,
+                queue: false,
+                specialEasing: {
+                  height: 'linear',
+                  width: 'linear'
+                }});
+
+
+
+    // modal.css('top', (window.innerHeight - modal.height()) / 2);
+    // modal.css('left', (window.innerWidth - modal.width()) / 2);
+    // modal.css('background-color', $(e.target).css('background-color'));
+    //modal.fadeIn(animTime);
+
+    oldDiv = jthis;
+  })
+
+  $('#modalDiv').on('click', function (e) {
+    $(this).fadeOut(animTime);
+  })
+  </script>
+
+</body>
+</html>

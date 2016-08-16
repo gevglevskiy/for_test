@@ -1,0 +1,18 @@
+#box {
+  background-color: green;
+  height: 100px;
+  width: 100px;
+}
+
+.day {
+  color: black;;
+  background-color: white;
+}
+.night {
+  color: white;
+  background-color: black;
+}
+.hello-dos{
+  color: white;
+  background-color: blue;
+}

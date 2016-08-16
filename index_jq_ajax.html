@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajax load test</title>
+  <!--<script type="text/javascript" src="js/jquery.js"> </script> -->
+  <script src="http://code.jquery.com/jquery-2.2.4.js"    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+
+  <p id="content_p"></p>
+
+  
+
+  <script type="text/javascript">
+    $.ajax({
+      url: "php/time.php",
+      cache: false,
+      success: function (html) {
+        $('#content_p').html(html);
+      }
+    })
+
+  </script>
+
+</body>
+</html>
