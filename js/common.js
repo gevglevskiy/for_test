@@ -10,6 +10,7 @@ var changeColor = function (e) {
 
   eventsObj.preventDefault(e);
 
+
   var elem = eventsObj.getTarget(e),
   colorData = elem.getAttribute('data-color');
 
